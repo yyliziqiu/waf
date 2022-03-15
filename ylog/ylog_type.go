@@ -45,7 +45,7 @@ type Entry struct {
 }
 
 type RequestField struct {
-	XRequestId string `json:"X-request-id,omitempty"`
+	XRequestId string `json:"x-request-id,omitempty"`
 	Method     string `json:"method,omitempty"`
 	Path       string `json:"path,omitempty"`
 }

@@ -8,7 +8,7 @@ import (
 
 func GetLogFields(c *gin.Context) ylog.RequestField {
 	return ylog.RequestField{
-		XRequestId: c.GetHeader("X-Request-ID"),
+		XRequestId: c.GetHeader("X-Request-Id"),
 		Method:     c.Request.Method,
 		Path:       c.Request.RequestURI,
 	}

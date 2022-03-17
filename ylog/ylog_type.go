@@ -29,10 +29,6 @@ func (l *Logger) write(data []byte) error {
 	if err != nil {
 		return err
 	}
-	_, err = l.out.Write([]byte{'\n'})
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -91,8 +87,14 @@ func (e *Entry) log(level uint8, request RequestField, message string) {
 	if level < e.logger.level {
 		return
 	}
-	e.setLevel(level).setRequest(request).setMessage(message)
-	err := e.logger.write(e.json())
+
+	e.setLevel(level)
+	e.setRequest(request)
+	e.setMessage(message)
+
+	encoder := json.NewEncoder(e.logger.out)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(e)
 	if err != nil {
 		e.err = err
 	}

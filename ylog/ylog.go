@@ -336,7 +336,7 @@ func FatalRF(request RequestField, message string, args ...interface{}) {
 }
 
 func Print(message string) {
-	_ = logger.write([]byte(time.Now().Format(time.RFC3339) + " " + message))
+	_ = logger.write([]byte(time.Now().Format(time.RFC3339) + " " + message + "\n"))
 }
 
 func Println(message string) {

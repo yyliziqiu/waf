@@ -91,3 +91,11 @@ func GetCliCtx(name string) (*mongo.Client, context.Context) {
 	connection := GetConnection(name)
 	return connection.Client, context.Background()
 }
+
+/**
+获取 db,context
+*/
+func GetDBCtx(name string, opts ...*options.DatabaseOptions) (*mongo.Database, context.Context) {
+	connection := GetConnection(name)
+	return connection.Client.Database(connection.Config.DefaultDB, opts...), context.Background()
+}

@@ -14,6 +14,7 @@ import (
 type Config struct {
 	Name                   string
 	URI                    string
+	DefaultDB              string
 	ReplicaSet             string
 	ConnectTimeout         time.Duration
 	ServerSelectionTimeout time.Duration

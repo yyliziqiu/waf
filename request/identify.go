@@ -66,7 +66,7 @@ func GetDeviceId(c *gin.Context) string {
 获取认证信息
 */
 func GetDeviceType(c *gin.Context) string {
-	return GetIdentify(c).GetAccType()
+	return GetIdentify(c).GetDeviceType()
 }
 
 /**

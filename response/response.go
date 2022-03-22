@@ -36,6 +36,13 @@ func SuccessOK(c *gin.Context) {
 }
 
 /**
+响应成功
+*/
+func OK(c *gin.Context) {
+	c.String(http.StatusOK, "")
+}
+
+/**
 请求终止
 */
 func Abort(c *gin.Context, err error) {

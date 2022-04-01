@@ -13,7 +13,7 @@ func PermitConsumer() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if !request.IsConsumer(c) {
 			ylog.Warning("permission forbidden, only consumer allow")
-			response.Fail(c, errs.PermissionForbidden)
+			response.Abort(c, errs.PermissionForbidden)
 			return
 		}
 	}
@@ -23,7 +23,7 @@ func PermitVisitor() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if !request.IsVisitor(c) {
 			ylog.WarningF("permission forbidden, only visitor allow")
-			response.Fail(c, errs.PermissionForbidden)
+			response.Abort(c, errs.PermissionForbidden)
 			return
 		}
 	}
@@ -33,7 +33,7 @@ func PermitAll() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if !request.IsConsumer(c) && !request.IsConsumer(c) {
 			ylog.WarningF("permission forbidden")
-			response.Fail(c, errs.PermissionForbidden)
+			response.Abort(c, errs.PermissionForbidden)
 			return
 		}
 	}

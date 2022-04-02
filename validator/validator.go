@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 
-	"github.com/yyliziqiu/waf/ylog"
+	"github.com/yyliziqiu/waf/logs"
 )
 
 const HIdLen = 24
@@ -39,12 +39,12 @@ var mhid validator.Func = func(fl validator.FieldLevel) bool {
 func Initialize() {
 	v, ok := binding.Validator.Engine().(*validator.Validate)
 	if !ok {
-		ylog.Fatal("初始化验证器失败")
+		logs.Fatal("初始化验证器失败")
 	}
 	if err := v.RegisterValidation("hid", hid); err != nil {
-		ylog.FatalE(err)
+		logs.Fatal(err)
 	}
 	if err := v.RegisterValidation("mhid", mhid); err != nil {
-		ylog.FatalE(err)
+		logs.Fatal(err)
 	}
 }

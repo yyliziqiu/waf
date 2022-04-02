@@ -5,8 +5,8 @@ import (
 
 	"github.com/yyliziqiu/waf/auth"
 	"github.com/yyliziqiu/waf/errs"
+	"github.com/yyliziqiu/waf/logs"
 	"github.com/yyliziqiu/waf/response"
-	"github.com/yyliziqiu/waf/ylog"
 )
 
 /**
@@ -15,7 +15,7 @@ import (
 func ParseTokenInfo(c *gin.Context) {
 	identify, err := auth.ParseTokenInfo(c.GetHeader("Token-Info"))
 	if err != nil {
-		ylog.Warning("Unauthorized")
+		logs.Warn("Unauthorized")
 		response.Abort(c, errs.Unauthorized)
 		return
 	}

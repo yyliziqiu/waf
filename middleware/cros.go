@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/yyliziqiu/waf/errs"
+	"github.com/yyliziqiu/waf/logs"
 	"github.com/yyliziqiu/waf/response"
 	"github.com/yyliziqiu/waf/util"
-	"github.com/yyliziqiu/waf/ylog"
 )
 
 var DefaultCrosHeaders = CrosHeaders{
@@ -50,7 +50,7 @@ func Cros(ch CrosHeaders) gin.HandlerFunc {
 			}
 			if util.ContainsString(ch.Origin, "*") {
 				if ch.AllowCredentials == true {
-					ylog.Warning("Allowing credentials for wildcard origins is insecure. Please specify more restrictive origins or set 'credentials' to false in your CORS configuration")
+					logs.Warn("Allowing credentials for wildcard origins is insecure. Please specify more restrictive origins or set 'credentials' to false in your CORS configuration")
 					response.Abort(c, errs.InternalServerError)
 					return
 				}

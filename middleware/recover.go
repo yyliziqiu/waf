@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/yyliziqiu/waf/errs"
+	"github.com/yyliziqiu/waf/logs"
 	"github.com/yyliziqiu/waf/response"
-	"github.com/yyliziqiu/waf/ylog"
 )
 
 var (
@@ -26,13 +26,11 @@ type errStack struct {
 
 func Recover() gin.HandlerFunc {
 	return gin.CustomRecoveryWithWriter(nil, func(c *gin.Context, err interface{}) {
-		ylog.WithFields(ylog.Fields{
-			"error": err,
-			"stack": errStack{
-				Error: err,
-				Stack: stack(3),
-			},
-		}).Error("panic")
+		if err2, ok := err.(error); ok {
+			logs.Errorf("panic error: %s, stack: %v", err2.Error(), stack(3))
+		} else {
+			logs.Errorf("panic error: %v, stack: %v", err, stack(3))
+		}
 		response.Abort(c, errs.InternalServerError)
 	})
 }

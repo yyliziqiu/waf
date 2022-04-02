@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/yyliziqiu/waf/ylog"
+	"github.com/yyliziqiu/waf/logs"
 )
 
 /**
@@ -45,7 +45,7 @@ type APIServer struct {
 */
 func (s *APIServer) Run() {
 	if err := s.engine.Run(fmt.Sprintf("%s:%s", s.IP, s.Port)); err != nil {
-		ylog.FatalE(err)
+		logs.Fatal(err)
 	}
 }
 

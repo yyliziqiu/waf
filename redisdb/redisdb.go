@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-redis/redis/v8"
 
-	"github.com/yyliziqiu/waf/ylog"
+	"github.com/yyliziqiu/waf/logs"
 )
 
 /**
@@ -22,7 +22,7 @@ func Initialize(configs ...Config) {
 		connection, err := New(config)
 		if err != nil {
 			Finally()
-			ylog.FatalE(err)
+			logs.Fatal(err)
 		}
 		connections[config.Name] = connection
 	}

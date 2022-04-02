@@ -6,7 +6,7 @@ import (
 
 	"github.com/Shopify/sarama"
 
-	"github.com/yyliziqiu/waf/ylog"
+	"github.com/yyliziqiu/waf/logs"
 )
 
 var producer sarama.SyncProducer
@@ -21,7 +21,7 @@ func InitializeProducer(c Config) {
 
 	producer, err = sarama.NewSyncProducer(strings.Split(c.Addr, ","), config)
 	if err != nil {
-		ylog.FatalE(err)
+		logs.Fatal(err)
 	}
 	// defer producer.Close()
 }

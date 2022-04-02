@@ -17,7 +17,7 @@ func Initialize(configs ...Config) {
 
 func GetCacheDuration(name string) time.Duration {
 	cf, ok := configMap[name]
-	if ok {
+	if !ok {
 		logs.Fatalf("未发现 { %s } 缓存配置", name)
 	}
 	return cf.Duration

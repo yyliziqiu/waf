@@ -29,7 +29,7 @@ func Recover() gin.HandlerFunc {
 		if err2, ok := err.(error); ok {
 			logs.Errorf("panic error: %s, stack: %v", err2.Error(), stack(3))
 		} else {
-			logs.Errorf("panic error: %v, stack: %v", err, stack(3))
+			logs.Errorf("panic error: %#v, stack: %v", err, stack(3))
 		}
 		response.Abort(c, errs.InternalServerError)
 	})

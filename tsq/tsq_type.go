@@ -1,6 +1,7 @@
 package tsq
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -38,5 +39,17 @@ func (s ServiceConfig) ToUrl() string {
 }
 
 func (s ServiceConfig) JoinUrl(postfix string) string {
+	if postfix == "" {
+		return s.ToUrl()
+	}
 	return strings.TrimRight(s.ToUrl(), "/") + "/" + strings.TrimLeft(postfix, "/")
+}
+
+type errorResponse struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+func (e errorResponse) ToString() string {
+	return fmt.Sprintf("[%d] %s", e.Code, e.Message)
 }

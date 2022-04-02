@@ -3,7 +3,6 @@ package tsq
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -12,6 +11,8 @@ import (
 )
 
 var (
+	serviceConfigMap map[string]ServiceConfig
+
 	ApiTokenName string
 	ApiToken     string
 
@@ -48,13 +49,25 @@ var client = http.Client{
 	Timeout: Timeout,
 }
 
-type errorResponse struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
+func Initialize(apiTokenName string, apiToken string, configs ...ServiceConfig) {
+	ApiTokenName, ApiToken = apiTokenName, apiToken
+
+	serviceConfigMap = make(map[string]ServiceConfig, len(configs))
+	for _, config := range configs {
+		serviceConfigMap[config.Name] = config
+	}
 }
 
-func (e errorResponse) ToString() string {
-	return fmt.Sprintf("[%d] %s", e.Code, e.Message)
+func ToUrl(serviceName string) string {
+	return serviceConfigMap[serviceName].ToUrl()
+}
+
+func JoinUrl(serviceName string, postfix string) string {
+	return serviceConfigMap[serviceName].JoinUrl(postfix)
+}
+
+func ServiceGet(serviceName string, postfix string, result interface{}) error {
+	return Get(JoinUrl(serviceName, postfix), result)
 }
 
 func Get(url string, result interface{}) error {
@@ -66,6 +79,10 @@ func Get(url string, result interface{}) error {
 	return Do(req, result)
 }
 
+func ServicePost(serviceName string, postfix string, contentType string, body io.Reader, result interface{}) error {
+	return Post(JoinUrl(serviceName, postfix), contentType, body, result)
+}
+
 func Post(url string, contentType string, body io.Reader, result interface{}) error {
 	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
@@ -75,6 +92,10 @@ func Post(url string, contentType string, body io.Reader, result interface{}) er
 	req.Header.Set("Content-Type", contentType)
 
 	return Do(req, result)
+}
+
+func ServicePut(serviceName string, postfix string, contentType string, body io.Reader, result interface{}) error {
+	return Put(JoinUrl(serviceName, postfix), contentType, body, result)
 }
 
 func Put(url string, contentType string, body io.Reader, result interface{}) error {

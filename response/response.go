@@ -24,7 +24,7 @@ func SetServiceNo(no int) {
 /**
 响应成功
 */
-func OK(c *gin.Context) {
+func Ok(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 

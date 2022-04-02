@@ -77,6 +77,6 @@ func Cros(ch CrosHeaders) gin.HandlerFunc {
 
 func HandleOptionsRequest(c *gin.Context) {
 	if c.Request.Method == "OPTIONS" {
-		response.OK(c)
+		response.Ok(c)
 	}
 }

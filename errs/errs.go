@@ -18,16 +18,17 @@ var (
 	ServiceResponseError = &Error{StatusCode: 504, Code: 900, Message: "Service Response Error"}
 
 	// client error
-	Retry           = &Error{StatusCode: 400, Code: 210, Message: "Retry"}
-	IPLimit         = &Error{StatusCode: 400, Code: 211, Message: "IP Limit"}
-	ParamsError     = &Error{StatusCode: 400, Code: 212, Message: "Params Error"}
-	NotExist        = &Error{StatusCode: 400, Code: 213, Message: "Not Exist"}
-	HasExisted      = &Error{StatusCode: 400, Code: 214, Message: "Has Existed"}
-	HasDeleted      = &Error{StatusCode: 400, Code: 215, Message: "Has Deleted"}
-	HasCanceled     = &Error{StatusCode: 400, Code: 216, Message: "Has Cancel"}
-	NotStart        = &Error{StatusCode: 400, Code: 217, Message: "Not Start"}
-	HasStopped      = &Error{StatusCode: 400, Code: 218, Message: "Has Stop"}
-	ForbiddenAction = &Error{StatusCode: 400, Code: 219, Message: "Forbidden Action"}
+	Retry       = &Error{StatusCode: 400, Code: 210, Message: "Retry"}
+	IPLimit     = &Error{StatusCode: 400, Code: 211, Message: "IP Limit"}
+	ParamsError = &Error{StatusCode: 400, Code: 212, Message: "Params Error"}
+	NotExist    = &Error{StatusCode: 400, Code: 213, Message: "Not Exist"}
+	HasExisted  = &Error{StatusCode: 400, Code: 214, Message: "Has Existed"}
+	HasDeleted  = &Error{StatusCode: 400, Code: 215, Message: "Has Deleted"}
+	HasCanceled = &Error{StatusCode: 400, Code: 216, Message: "Has Cancel"}
+	NotStart    = &Error{StatusCode: 400, Code: 217, Message: "Not Start"}
+	HasStopped  = &Error{StatusCode: 400, Code: 218, Message: "Has Stop"}
+	Illegal     = &Error{StatusCode: 400, Code: 219, Message: "Illegal"}
+	Forbidden   = &Error{StatusCode: 400, Code: 220, Message: "Forbidden"}
 
 	// server error
 
